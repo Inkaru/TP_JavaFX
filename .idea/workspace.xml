@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="86113d34-8c71-493a-9a58-22f489df0849" name="Default Changelist" comment="" />
+    <list default="true" id="86113d34-8c71-493a-9a58-22f489df0849" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP_JavaFx_Cabaret_Fouque/drawingEditor/controller/ControllerDessin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_JavaFx_Cabaret_Fouque/drawingEditor/controller/ControllerDessin$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP_JavaFx_Cabaret_Fouque/drawingEditor/controller/ControllerDessin$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_JavaFx_Cabaret_Fouque/drawingEditor/controller/ControllerDessin$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP_JavaFx_Cabaret_Fouque/drawingEditor/controller/ControllerDessin$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_JavaFx_Cabaret_Fouque/drawingEditor/controller/ControllerDessin$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP_JavaFx_Cabaret_Fouque/drawingEditor/controller/ControllerDessin$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_JavaFx_Cabaret_Fouque/drawingEditor/controller/ControllerDessin$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP_JavaFx_Cabaret_Fouque/drawingEditor/controller/ControllerDessin$DnDToMoveShape.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_JavaFx_Cabaret_Fouque/drawingEditor/controller/ControllerDessin$DnDToMoveShape.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP_JavaFx_Cabaret_Fouque/drawingEditor/controller/ControllerDessin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_JavaFx_Cabaret_Fouque/drawingEditor/controller/ControllerDessin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/drawingEditor/controller/ControllerDessin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/drawingEditor/controller/ControllerDessin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/drawingEditor/drawingEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/drawingEditor/drawingEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/drawingEditor/model/Forme.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/drawingEditor/model/Forme.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,8 +40,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/drawingEditor/view/drawingEditor.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="16" column="23" lean-forward="true" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+            <state relative-caret-position="163">
+              <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
             </state>
           </provider>
           <provider editor-type-id="JavaFX-Scene-Builder" />
@@ -54,17 +66,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/drawingEditor/model/Forme.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+            <state relative-caret-position="323">
+              <caret line="22" column="52" selection-start-line="22" selection-start-column="52" selection-end-line="22" selection-end-column="52" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/drawingEditor/controller/ControllerDessin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-760">
-              <caret line="108" column="8" selection-start-line="108" selection-start-column="8" selection-end-line="108" selection-end-column="8" />
+            <state relative-caret-position="2958">
+              <caret line="174" lean-forward="true" selection-start-line="174" selection-end-line="174" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -75,7 +87,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/drawingEditor/model/FormeImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
+            <state relative-caret-position="340">
               <caret line="21" selection-start-line="21" selection-end-line="21" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -87,8 +99,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/drawingEditor/drawingEditor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
-              <caret line="24" column="1" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
+            <state relative-caret-position="289">
+              <caret line="19" column="45" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -96,7 +108,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/drawingEditor/model/Rectangle.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
@@ -122,78 +134,40 @@
       <find>update</find>
     </findStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/drawingEditor/model/view/controller/view.fxml" />
         <option value="$PROJECT_DIR$/src/drawingEditor/view/view.fxml" />
-        <option value="$PROJECT_DIR$/src/drawingEditor/drawingEditor.java" />
         <option value="$PROJECT_DIR$/src/drawingEditor/Dessin.java" />
-        <option value="$PROJECT_DIR$/src/drawingEditor/model/Forme.java" />
         <option value="$PROJECT_DIR$/src/drawingEditor/model/Rectangle.java" />
         <option value="$PROJECT_DIR$/src/drawingEditor/model/Ellipse.java" />
         <option value="$PROJECT_DIR$/src/drawingEditor/model/DessinImpl.java" />
         <option value="$PROJECT_DIR$/src/drawingEditor/model/FormeImpl.java" />
         <option value="$PROJECT_DIR$/src/drawingEditor/view/drawingEditor.fxml" />
         <option value="$PROJECT_DIR$/src/drawingEditor/controller/ControllerDessin.java" />
+        <option value="$PROJECT_DIR$/src/drawingEditor/model/Forme.java" />
+        <option value="$PROJECT_DIR$/src/drawingEditor/drawingEditor.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="294" />
-    <option name="y" value="-4" />
-    <option name="width" value="1398" />
-    <option name="height" value="992" />
+    <option name="x" value="1358" />
+    <option name="y" value="-561" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="TP_JavaFx_Cabaret_Fouque" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TP_JavaFx_Cabaret_Fouque" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TP_JavaFx_Cabaret_Fouque" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TP_JavaFx_Cabaret_Fouque" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TP_JavaFx_Cabaret_Fouque" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TP_JavaFx_Cabaret_Fouque" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="drawingEditor" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TP_JavaFx_Cabaret_Fouque" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TP_JavaFx_Cabaret_Fouque" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="drawingEditor" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TP_JavaFx_Cabaret_Fouque" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TP_JavaFx_Cabaret_Fouque" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="drawingEditor" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TP_JavaFx_Cabaret_Fouque" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TP_JavaFx_Cabaret_Fouque" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="drawingEditor" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -247,27 +221,27 @@
       <workItem from="1545376339899" duration="6334000" />
       <workItem from="1546844595091" duration="7280000" />
       <workItem from="1546874440842" duration="7813000" />
+      <workItem from="1546891732960" duration="852000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21427000" />
+    <option name="totallyTimeSpent" value="22279000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="1358" y="-561" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25642964" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18336888" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32985386" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.15548281" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.15492958" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -277,7 +251,7 @@
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.3289689" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50075644" side_tool="true" weight="0.3289689" />
       <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49924356" weight="0.3289689" />
-      <window_info anchor="right" id="Maven" />
+      <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.2498618" />
@@ -287,6 +261,7 @@
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Maven Projects" order="8" />
+      <window_info anchor="right" id="Maven" order="9" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -308,45 +283,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/drawingEditor/view/drawingEditor.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="16" column="23" lean-forward="true" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/drawingEditor/model/Rectangle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/drawingEditor/model/FormeImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/drawingEditor/model/Forme.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/drawingEditor/drawingEditor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="24" column="1" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="323">
+          <caret line="22" column="52" selection-start-line="22" selection-start-column="52" selection-end-line="22" selection-end-column="52" />
         </state>
       </provider>
     </entry>
@@ -364,13 +304,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/drawingEditor/view/drawingEditor.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/drawingEditor/controller/ControllerDessin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-760">
-          <caret line="108" column="8" selection-start-line="108" selection-start-column="8" selection-end-line="108" selection-end-column="8" />
+        <state relative-caret-position="2958">
+          <caret line="174" lean-forward="true" selection-start-line="174" selection-end-line="174" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/drawingEditor/model/FormeImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/drawingEditor/drawingEditor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="19" column="45" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/drawingEditor/model/Rectangle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>

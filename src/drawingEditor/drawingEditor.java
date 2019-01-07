@@ -17,7 +17,7 @@ public class drawingEditor extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("view/drawingEditor.fxml" ));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Visualiseur de mort" );
+        primaryStage.setTitle("drawing Editor" );
         primaryStage.show();
         primaryStage.centerOnScreen();
 

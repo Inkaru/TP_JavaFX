@@ -3,7 +3,6 @@ package drawingEditor.controller;
 import drawingEditor.model.*;
 import javafx.beans.binding.*;
 import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -56,18 +55,15 @@ public class ControllerDessin implements Initializable {
         colorPicker.setValue(Color.RED);
         xLabel.setVisible(false);
         yLabel.setVisible(false);
-        //scrollPane.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
         pane.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-
-        System.out.println(scrollPane.getWidth()+" "+scrollPane.getWidth());
         dessin = new DessinImpl();
+        updateSizePane();
         pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (groupEditing.getSelectedToggle().equals(recButton)) {
-                    Rectangle rect = new Rectangle(event.getX(), event.getY(), width.getValue(), height.getValue(), colorPicker.getValue());
-                    dessin.ajouterForme(rect);
-                } else if (groupEditing.getSelectedToggle().equals(ellButton)) {
+                if (recButton.isSelected()) {
+                    dessin.ajouterForme(new Rectangle(event.getX(), event.getY(), width.getValue(), height.getValue(), colorPicker.getValue()));
+                } else if (ellButton.isSelected()) {
                     dessin.ajouterForme(new Ellipse(event.getX(), event.getY(), width.getValue(), height.getValue(), colorPicker.getValue()));
                 }
             }
@@ -75,13 +71,12 @@ public class ControllerDessin implements Initializable {
         dessin.getFormes().addListener(new ListChangeListener<Forme>() {
             @Override
             public void onChanged(Change<? extends Forme> event) {
-                if (event.next()){
+                if (event.next()) {
                     if (event.wasAdded()) {
-                        //updateSizePane();
                         List list = event.getAddedSubList();
-                        for (Object f : list){
+                        for (Object f : list) {
                             if (f instanceof Forme) {
-                                Shape shape = createViewShapeFromShape((Forme)f);
+                                Shape shape = createViewShapeFromShape((Forme) f);
                                 pane.getChildren().add(shape);
                             }
                         }
@@ -90,7 +85,7 @@ public class ControllerDessin implements Initializable {
                     if (event.wasRemoved()) {
 
                         List list = event.getRemoved();
-                        for (Object f : list){
+                        for (Object f : list) {
                             if (f instanceof Forme) {
                                 for (Node s : pane.getChildren()) {
                                     if (s.getUserData().equals(f)) {
@@ -106,15 +101,13 @@ public class ControllerDessin implements Initializable {
                 }
             }
         });
-        
-        updateSizePane();
 
 
     }
 
-    private Shape createViewShapeFromShape(final Forme forme){
-        if (forme instanceof Rectangle){
-            javafx.scene.shape.Rectangle res = new javafx.scene.shape.Rectangle(/*forme.getPositionX(),forme.getPositionY(),forme.getWidth(),forme.getHeight()*/);
+    private Shape createViewShapeFromShape(final Forme forme) {
+        if (forme instanceof Rectangle) {
+            javafx.scene.shape.Rectangle res = new javafx.scene.shape.Rectangle();
             res.heightProperty().bindBidirectional(forme.heightProperty());
             res.widthProperty().bindBidirectional(forme.widthProperty());
             res.xProperty().bindBidirectional(forme.positionXProperty());
@@ -125,17 +118,16 @@ public class ControllerDessin implements Initializable {
             res.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    if (groupEditing.getSelectedToggle().equals(delButton)) {
-                        System.out.println("Supression rect");
+                    if (delButton.isSelected()) {
                         dessin.supprimerForme(forme);
                     }
                 }
             });
             return res;
         } else if (forme instanceof Ellipse) {
-            javafx.scene.shape.Ellipse res = new javafx.scene.shape.Ellipse(/*forme.getPositionX(),forme.getPositionY(),forme.getWidth(),forme.getHeight()*/);
-            res.radiusXProperty().bind(Bindings.divide(forme.widthProperty(),2.0));
-            res.radiusYProperty().bind(Bindings.divide(forme.heightProperty(),2.0));
+            javafx.scene.shape.Ellipse res = new javafx.scene.shape.Ellipse();
+            res.radiusXProperty().bind(Bindings.divide(forme.widthProperty(), 2.0));
+            res.radiusYProperty().bind(Bindings.divide(forme.heightProperty(), 2.0));
             res.centerXProperty().bindBidirectional(forme.positionXProperty());
             res.centerYProperty().bindBidirectional(forme.positionYProperty());
             res.fillProperty().bindBidirectional(forme.couleurProperty());
@@ -144,9 +136,8 @@ public class ControllerDessin implements Initializable {
             res.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    if (groupEditing.getSelectedToggle().equals(delButton)) {
-                        //System.out.println("Supression ell");
-                        dessin.supprimerForme((Forme)res.getUserData());
+                    if (delButton.isSelected()) {
+                        dessin.supprimerForme((Forme) res.getUserData());
                     }
                 }
             });
@@ -158,29 +149,26 @@ public class ControllerDessin implements Initializable {
     private class DnDToMoveShape {
         private double pressPositionX;
         private double pressPositionY;
-        //private Shape view;
         private double x_init;
         private double y_init;
 
-        public DnDToMoveShape(Shape view){
+        public DnDToMoveShape(Shape view) {
 
-                view.setOnMousePressed(evt -> {
-                    if (moveButton.isSelected()) {
-                        pressPositionX = evt.getX();
-                        pressPositionY = evt.getY();
-                        x_init = ((Forme) view.getUserData()).getPositionX();
-                        y_init = ((Forme) view.getUserData()).getPositionY();
-                    }
-                });
-                view.setOnMouseDragged(evt -> {
-                    if (moveButton.isSelected()) {
-                        ((Forme) view.getUserData()).setPosition(x_init + (evt.getX() - pressPositionX), y_init + (evt.getY() - pressPositionY));
-                    }
-                    updateSizePane();
-                });
-                view.setOnMouseReleased(evt -> {
-
-                });
+            view.setOnMousePressed(evt -> {
+                if (moveButton.isSelected()) {
+                    pressPositionX = evt.getX();
+                    pressPositionY = evt.getY();
+                    x_init = ((Forme) view.getUserData()).getPositionX();
+                    y_init = ((Forme) view.getUserData()).getPositionY();
+                }
+            });
+            view.setOnMouseDragged(evt -> {
+                if (moveButton.isSelected()) {
+                    ((Forme) view.getUserData()).setPosition(x_init + (evt.getX() - pressPositionX), y_init + (evt.getY() - pressPositionY));
+                    //utiliser getSceneX et Y ? mais fait un décalage bizarre
+                }
+                updateSizePane();
+            });
 
         }
     }
@@ -188,24 +176,16 @@ public class ControllerDessin implements Initializable {
     private void updateSizePane() {
         double maxX = 0;
         double maxY = 0;
-        for(Object s : dessin.getFormes()){
-            System.out.println(s.getClass());
-            if (s instanceof Forme){
-                maxX = Math.max(maxX,((Forme)s).getPositionX()+((Forme)s).getWidth());
-                maxY = Math.max(maxY,((Forme)s).getPositionY()+((Forme)s).getHeight());
+        for (Object s : dessin.getFormes()) {
+
+            if (s instanceof Forme) {
+                maxX = Math.max(maxX, ((Forme) s).getPositionX() + ((Forme) s).getWidth());
+                maxY = Math.max(maxY, ((Forme) s).getPositionY() + ((Forme) s).getHeight());
             }
         }
-        double sizeY = Math.max(scrollPane.getPrefHeight(),maxY);
-        double sizeX = Math.max(scrollPane.getPrefWidth(),maxX);
-        pane.setPrefSize(sizeX,sizeY);
-        System.out.println("update" + pane.getPrefHeight());
-        System.out.println(maxX);
-       // pane.setBackground(new Background(new BackgroundFill(Color.WHITE,,null)));
-
-        /**
-        pane.setMaxHeight(Math.max(scrollPane.getMaxHeight(),maxY));
-        pane.setMaxWidth(Math.max(scrollPane.getMaxWidth(),maxX));
-         **/
+        double sizeY = Math.max(scrollPane.getPrefHeight(), maxY);
+        double sizeX = Math.max(scrollPane.getPrefWidth(), maxX);
+        pane.setPrefSize(sizeX, sizeY);
 
     }
 

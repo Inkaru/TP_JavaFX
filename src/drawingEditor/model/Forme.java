@@ -22,10 +22,6 @@ public interface Forme {
 	
 	void deplacer(final double tx, final double ty);
 	
-//	void setWidth(final double w);
-	
-//	void setHeight(final double h);
-	
 	ObjectProperty<Paint> couleurProperty();
 	
 	DoubleProperty positionXProperty();
