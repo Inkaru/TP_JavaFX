@@ -178,9 +178,13 @@ public class ControllerDessin implements Initializable {
         double maxY = 0;
         for (Object s : dessin.getFormes()) {
 
-            if (s instanceof Forme) {
+            if (s instanceof Rectangle) {
                 maxX = Math.max(maxX, ((Forme) s).getPositionX() + ((Forme) s).getWidth());
                 maxY = Math.max(maxY, ((Forme) s).getPositionY() + ((Forme) s).getHeight());
+            }
+            if (s instanceof Ellipse) {
+                maxX = Math.max(maxX, ((Forme) s).getPositionX() + ((Forme) s).getWidth()/2);
+                maxY = Math.max(maxY, ((Forme) s).getPositionY() + ((Forme) s).getHeight()/2);
             }
         }
         double sizeY = Math.max(scrollPane.getPrefHeight(), maxY);
