@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<BorderPane fx:id="borderPane"  xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drawingEditor.controller.ControllerDessin">
+   <top>
+      <ToolBar prefHeight="40.0" prefWidth="600.0">
+        <items>
+            <fx:define>
+                <ToggleGroup fx:id="groupEditing"/>
+            </fx:define>
+            <ToggleButton fx:id="recButton" mnemonicParsing="false" text="rec" toggleGroup="$groupEditing"/>
+            <ToggleButton fx:id="ellButton" layoutX="10.0" layoutY="11.0" mnemonicParsing="false" text="ell" toggleGroup="$groupEditing"/>
+            <ToggleButton fx:id="delButton" layoutX="120.0" layoutY="11.0" mnemonicParsing="false" text="del" toggleGroup="$groupEditing"/>
+            <ToggleButton fx:id="moveButton" layoutX="91.0" layoutY="11.0" mnemonicParsing="false" text="move" toggleGroup="$groupEditing"/>
+            <ColorPicker fx:id="colorPicker" prefHeight="26.0" prefWidth="104.0" />
+            <Label fx:id="xLabel"/>
+            <Label fx:id="yLabel"/>
+            <Label text="Width" />
+            <Spinner fx:id="width" editable="true" prefHeight="26.0" prefWidth="81.0" min="10.0" max="200.0" initialValue="100.0" amountToStepBy="10.0"/>
+            <Label text="Height" />
+            <Spinner fx:id="height" editable="true" prefHeight="26.0" prefWidth="93.0" min="10.0" max="200.0" initialValue="100.0" amountToStepBy="10.0"/>
+
+        </items>
+      </ToolBar>
+   </top>
+    <center>
+        <ScrollPane fx:id="scrollPane" prefHeight="400.0" prefWidth="600.0">
+            <Pane fx:id="pane">
+
+            </Pane>
+        </ScrollPane>
+    </center>
+</BorderPane>
