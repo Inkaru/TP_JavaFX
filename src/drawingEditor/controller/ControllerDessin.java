@@ -176,19 +176,33 @@ public class ControllerDessin implements Initializable {
     private void updateSizePane() {
         double maxX = 0;
         double maxY = 0;
+        double minX = 0;
+        double minY = 0;
         for (Object s : dessin.getFormes()) {
 
             if (s instanceof Rectangle) {
                 maxX = Math.max(maxX, ((Forme) s).getPositionX() + ((Forme) s).getWidth());
                 maxY = Math.max(maxY, ((Forme) s).getPositionY() + ((Forme) s).getHeight());
+                minX = Math.min(minX, ((Forme) s).getPositionX());
+                minY = Math.min(minY, ((Forme) s).getPositionY());
             }
             if (s instanceof Ellipse) {
                 maxX = Math.max(maxX, ((Forme) s).getPositionX() + ((Forme) s).getWidth()/2);
                 maxY = Math.max(maxY, ((Forme) s).getPositionY() + ((Forme) s).getHeight()/2);
+                minX = Math.min(minX, ((Forme) s).getPositionX() - ((Forme) s).getWidth()/2);
+                minY = Math.min(minY, ((Forme) s).getPositionY() - ((Forme) s).getHeight()/2);
             }
         }
+
         double sizeY = Math.max(scrollPane.getPrefHeight(), maxY);
         double sizeX = Math.max(scrollPane.getPrefWidth(), maxX);
+
+        sizeX+=Math.abs(minX);
+        sizeY+=Math.abs(minY);
+        
+        for(Object s : dessin.getFormes()){
+            ((Forme)s).deplacer(Math.abs(minX),Math.abs(minY));
+        }
         pane.setPrefSize(sizeX, sizeY);
 
     }
