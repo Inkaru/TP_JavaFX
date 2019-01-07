@@ -200,8 +200,8 @@ public class ControllerDessin implements Initializable {
         sizeX-=minX;  //on agrandi la taille du pane du décalage nécessaire
         sizeY-=minY;
 
-        for(Object s : dessin.getFormes()){
-            ((Forme)s).deplacer(-minX,-minY); //on décale toutes les formes vers le bas droit
+        for(Forme s : dessin.getFormes()){
+            s.deplacer(-minX,-minY); //on décale toutes les formes vers le bas droit
         }
         pane.setPrefSize(sizeX, sizeY);
 
