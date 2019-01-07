@@ -176,8 +176,8 @@ public class ControllerDessin implements Initializable {
     private void updateSizePane() {
         double maxX = 0;
         double maxY = 0;
-        double minX = 0;
-        double minY = 0;
+        double minX = 0; //pane.getPrefWidth(); pour faire des trucs marrants
+        double minY = 0; //pane.getPrefHeight();
         for (Object s : dessin.getFormes()) {
 
             if (s instanceof Rectangle) {
@@ -197,11 +197,11 @@ public class ControllerDessin implements Initializable {
         double sizeY = Math.max(scrollPane.getPrefHeight(), maxY);
         double sizeX = Math.max(scrollPane.getPrefWidth(), maxX);
 
-        sizeX+=Math.abs(minX);
-        sizeY+=Math.abs(minY);
-        
+        sizeX-=minX;  //on agrandi la taille du pane du décalage nécessaire
+        sizeY-=minY;
+
         for(Object s : dessin.getFormes()){
-            ((Forme)s).deplacer(Math.abs(minX),Math.abs(minY));
+            ((Forme)s).deplacer(-minX,-minY); //on décale toutes les formes vers le bas droit
         }
         pane.setPrefSize(sizeX, sizeY);
 
