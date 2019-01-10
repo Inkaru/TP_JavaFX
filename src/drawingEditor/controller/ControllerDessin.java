@@ -47,6 +47,7 @@ public class ControllerDessin implements Initializable {
     @FXML
     ScrollPane scrollPane;
 
+
     private Dessin dessin;
 
     @Override
@@ -200,11 +201,13 @@ public class ControllerDessin implements Initializable {
         sizeX-=minX;  //on agrandi la taille du pane du décalage nécessaire
         sizeY-=minY;
 
+
+
         for(Forme s : dessin.getFormes()){
-            s.deplacer(-minX,-minY); //on décale toutes les formes vers le bas droit
+            s.deplacer(-minX,-minY); //on décale toutes les formes vers le bas droit -> probleme, on deplace aussi la forme qui update la taille lors du DnD ?
+                                        // peut etre rajouter un argument forme à la fonction update ?
         }
         pane.setPrefSize(sizeX, sizeY);
-
     }
 
 }
