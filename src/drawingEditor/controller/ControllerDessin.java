@@ -26,6 +26,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
 import javafx.util.StringConverter;
 
@@ -232,7 +233,6 @@ public class ControllerDessin implements Initializable {
 
         public DnDToMoveShape(Shape view) {
             Forme f = (Forme) view.getUserData();
-
             view.setOnMousePressed(evt -> {
                 if (moveButton.isSelected()) {
                     pressPositionX = evt.getX();
@@ -243,7 +243,8 @@ public class ControllerDessin implements Initializable {
                     xLabel.textProperty().bind(Bindings.createStringBinding(() -> "x: "+f.getPositionX(),f.positionXProperty()));
                     yLabel.setVisible(true);
                     yLabel.textProperty().bind(Bindings.createStringBinding(() -> "y: "+f.getPositionY(),f.positionYProperty()));
-
+                    Color c = (Color)f.getCouleur();
+                    f.setCouleur(new Color(c.getRed(),c.getGreen(),c.getBlue(),c.getOpacity()/2));
                 }
             });
             view.setOnMouseDragged(evt -> {
@@ -258,6 +259,8 @@ public class ControllerDessin implements Initializable {
                 if (moveButton.isSelected()) {
                     xLabel.setVisible(false);
                     yLabel.setVisible(false);
+                    Color c = (Color)f.getCouleur();
+                    f.setCouleur(new Color(c.getRed(),c.getGreen(),c.getBlue(),c.getOpacity()*2));
                 }
             });
         }
