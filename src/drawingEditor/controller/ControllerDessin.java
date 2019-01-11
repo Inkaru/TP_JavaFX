@@ -2,6 +2,8 @@ package drawingEditor.controller;
 
 import drawingEditor.model.*;
 import javafx.beans.binding.*;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,9 +16,11 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import javafx.util.StringConverter;
 
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -46,7 +50,15 @@ public class ControllerDessin implements Initializable {
     Pane pane;
     @FXML
     ScrollPane scrollPane;
+    @FXML
+    ToggleButton lineButton;
+    @FXML
+    ToggleButton rainbowButton;
+    @FXML
+    ToggleButton eraseButton;
 
+    final static private Color[] rainbowTab = {Color.DARKRED,Color.RED,Color.ORANGERED,Color.ORANGE,Color.LIGHTGOLDENRODYELLOW,Color.YELLOW,Color.YELLOWGREEN,Color.GREEN,Color.CYAN,Color.BLUE,Color.INDIGO,Color.BLUEVIOLET,Color.PURPLE};
+    static int indice_rainbow= 0;
 
     private Dessin dessin;
 
@@ -57,6 +69,7 @@ public class ControllerDessin implements Initializable {
         xLabel.setVisible(false);
         yLabel.setVisible(false);
         pane.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+        pane.setPrefSize(500,500);
         dessin = new DessinImpl();
         updateSizePane();
         pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -69,6 +82,33 @@ public class ControllerDessin implements Initializable {
                 }
             }
         });
+
+        pane.setOnMousePressed(evt -> {
+            if (lineButton.isSelected()) {
+
+            }
+        });
+        pane.setOnMouseDragged(evt -> {
+            if (lineButton.isSelected()) {
+               dessin.ajouterForme(new Ellipse(evt.getX(), evt.getY(), Math.min(width.getValue(), height.getValue()),Math.min(width.getValue(), height.getValue()), colorPicker.getValue()));
+            } else if (rainbowButton.isSelected()){
+                dessin.ajouterForme(new Ellipse(evt.getX(), evt.getY(), Math.min(width.getValue(), height.getValue()),Math.min(width.getValue(), height.getValue()), new Color(rainbowTab[indice_rainbow].getRed(),rainbowTab[indice_rainbow].getGreen(),rainbowTab[indice_rainbow].getBlue(),0.5)));
+                if(indice_rainbow==rainbowTab.length-1) indice_rainbow = 0;
+                else indice_rainbow++;
+            } else if (eraseButton.isSelected()){
+                ArrayList<Forme> list = new ArrayList<>();
+                for(Forme f : dessin.getFormes()){
+                    if ((Math.abs(f.getPositionX()-evt.getX())<f.getWidth()/2)&&(Math.abs(f.getPositionY()-evt.getY())<f.getHeight()/2)){
+                        list.add(f);
+                    }
+                }
+                for (Forme f : list){
+                    dessin.supprimerForme(f);
+                }
+            }
+
+        });
+
         dessin.getFormes().addListener(new ListChangeListener<Forme>() {
             @Override
             public void onChanged(Change<? extends Forme> event) {
@@ -102,9 +142,9 @@ public class ControllerDessin implements Initializable {
                 }
             }
         });
-
-
     }
+
+
 
     private Shape createViewShapeFromShape(final Forme forme) {
         if (forme instanceof Rectangle) {
@@ -154,25 +194,53 @@ public class ControllerDessin implements Initializable {
         private double y_init;
 
         public DnDToMoveShape(Shape view) {
+            Forme f = (Forme) view.getUserData();
 
             view.setOnMousePressed(evt -> {
                 if (moveButton.isSelected()) {
                     pressPositionX = evt.getX();
                     pressPositionY = evt.getY();
-                    x_init = ((Forme) view.getUserData()).getPositionX();
-                    y_init = ((Forme) view.getUserData()).getPositionY();
+                    x_init = f.getPositionX();
+                    y_init = f.getPositionY();
+                    xLabel.setVisible(true);
+                    xLabel.textProperty().bind(Bindings.createStringBinding(() -> "x: "+f.getPositionX(),f.positionXProperty()));
+                    yLabel.setVisible(true);
+                    yLabel.textProperty().bind(Bindings.createStringBinding(() -> "y: "+f.getPositionY(),f.positionYProperty()));
+
                 }
             });
             view.setOnMouseDragged(evt -> {
                 if (moveButton.isSelected()) {
-                    ((Forme) view.getUserData()).setPosition(x_init + (evt.getX() - pressPositionX), y_init + (evt.getY() - pressPositionY));
+                    f.setPosition(x_init + (evt.getX() - pressPositionX), y_init + (evt.getY() - pressPositionY));
                     //utiliser getSceneX et Y ? mais fait un décalage bizarre
                 }
                 updateSizePane();
             });
 
+            view.setOnMouseReleased(evt -> {
+                if (moveButton.isSelected()) {
+                    xLabel.setVisible(false);
+                    yLabel.setVisible(false);
+                }
+            });
         }
     }
+
+
+
+
+
+    final StringConverter<Double> conversion = new StringConverter<Double>() {
+        @Override
+        public String toString(Double object) {
+            return String.valueOf((object));
+        }
+
+        @Override
+        public Double fromString(String string) {
+            return (Double.valueOf(string));
+        }
+    };
 
     private void updateSizePane() {
         double maxX = 0;
@@ -184,14 +252,14 @@ public class ControllerDessin implements Initializable {
             if (s instanceof Rectangle) {
                 maxX = Math.max(maxX, ((Forme) s).getPositionX() + ((Forme) s).getWidth());
                 maxY = Math.max(maxY, ((Forme) s).getPositionY() + ((Forme) s).getHeight());
-                minX = Math.min(minX, ((Forme) s).getPositionX());
-                minY = Math.min(minY, ((Forme) s).getPositionY());
+                //minX = Math.min(minX, ((Forme) s).getPositionX());
+                //minY = Math.min(minY, ((Forme) s).getPositionY());
             }
             if (s instanceof Ellipse) {
                 maxX = Math.max(maxX, ((Forme) s).getPositionX() + ((Forme) s).getWidth()/2);
                 maxY = Math.max(maxY, ((Forme) s).getPositionY() + ((Forme) s).getHeight()/2);
-                minX = Math.min(minX, ((Forme) s).getPositionX() - ((Forme) s).getWidth()/2);
-                minY = Math.min(minY, ((Forme) s).getPositionY() - ((Forme) s).getHeight()/2);
+                //minX = Math.min(minX, ((Forme) s).getPositionX() - ((Forme) s).getWidth()/2);
+               // minY = Math.min(minY, ((Forme) s).getPositionY() - ((Forme) s).getHeight()/2);
             }
         }
 
@@ -204,8 +272,10 @@ public class ControllerDessin implements Initializable {
 
 
         for(Forme s : dessin.getFormes()){
-            s.deplacer(-minX,-minY); //on décale toutes les formes vers le bas droit -> probleme, on deplace aussi la forme qui update la taille lors du DnD ?
-                                        // peut etre rajouter un argument forme à la fonction update ?
+
+                s.deplacer(-minX, -minY); //on décale toutes les formes vers le bas droit -> probleme, on deplace auss // la forme qui update la taille lors du DnD ?
+                // peut etre rajouter un argument forme à la fonction update ?
+
         }
         pane.setPrefSize(sizeX, sizeY);
     }

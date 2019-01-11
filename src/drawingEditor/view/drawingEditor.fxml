@@ -19,16 +19,18 @@
             </fx:define>
             <ToggleButton fx:id="recButton" mnemonicParsing="false" text="rec" toggleGroup="$groupEditing"/>
             <ToggleButton fx:id="ellButton" layoutX="10.0" layoutY="11.0" mnemonicParsing="false" text="ell" toggleGroup="$groupEditing"/>
+            <ToggleButton fx:id="lineButton" layoutX="10.0" layoutY="11.0" mnemonicParsing="false" text="line" toggleGroup="$groupEditing"/>
+            <ToggleButton fx:id="rainbowButton" layoutX="10.0" layoutY="11.0" mnemonicParsing="false" text="rainbow" toggleGroup="$groupEditing"/>
             <ToggleButton fx:id="delButton" layoutX="120.0" layoutY="11.0" mnemonicParsing="false" text="del" toggleGroup="$groupEditing"/>
+            <ToggleButton fx:id="eraseButton" layoutX="120.0" layoutY="11.0" mnemonicParsing="false" text="erase" toggleGroup="$groupEditing"/>
             <ToggleButton fx:id="moveButton" layoutX="91.0" layoutY="11.0" mnemonicParsing="false" text="move" toggleGroup="$groupEditing"/>
             <ColorPicker fx:id="colorPicker" prefHeight="26.0" prefWidth="104.0" />
-            <Label fx:id="xLabel"/>
-            <Label fx:id="yLabel"/>
             <Label text="Width" />
             <Spinner fx:id="width" editable="true" prefHeight="26.0" prefWidth="81.0" min="10.0" max="200.0" initialValue="100.0" amountToStepBy="10.0"/>
             <Label text="Height" />
             <Spinner fx:id="height" editable="true" prefHeight="26.0" prefWidth="93.0" min="10.0" max="200.0" initialValue="100.0" amountToStepBy="10.0"/>
-
+            <Label fx:id="xLabel"/>
+            <Label fx:id="yLabel"/>
         </items>
       </ToolBar>
    </top>
