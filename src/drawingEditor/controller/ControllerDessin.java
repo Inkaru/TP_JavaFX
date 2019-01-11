@@ -65,7 +65,6 @@ public class ControllerDessin implements Initializable {
     final static private Color[] rainbowTab = {Color.DARKRED,Color.RED,Color.ORANGERED,Color.ORANGE,Color.LIGHTGOLDENRODYELLOW,Color.YELLOW,Color.YELLOWGREEN,Color.GREEN,Color.CYAN,Color.BLUE,Color.INDIGO,Color.BLUEVIOLET,Color.PURPLE};
     static int indice_rainbow= 0;
 
-    //private static Curseur cursor = new Curseur();
     private static SimpleObjectProperty<Shape> cursor = new SimpleObjectProperty<>();
 
 
@@ -81,11 +80,6 @@ public class ControllerDessin implements Initializable {
         pane.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
         pane.setPrefSize(500,500);
         dessin = new DessinImpl();
-
-        //Shape shape_cursor = Shape_cursor_creator(new Rectangle(1,1,1,1,Color.RED));
-        //cursor.setValue(shape_cursor);
-
-
         updateSizePane();
         pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -117,13 +111,13 @@ public class ControllerDessin implements Initializable {
                     dessin.supprimerForme(f);
                 }
                 Forme forme_curseur = new Ellipse(evt.getX(),evt.getY(),Math.min(width.getValue(), height.getValue()),Math.min(width.getValue(), height.getValue()),new Color(0,0,0,0.2));
-                cursor.setValue(Shape_cursor_creator(forme_curseur));
+                cursor.setValue(createViewShapeFromShape(forme_curseur));
             }
 
         });
 
         pane.setOnMouseMoved(evt->{
-            System.out.println(evt.getX() + " " +evt.getY());
+            //System.out.println(evt.getX() + " " +evt.getY());
             Forme forme_curseur = new Ellipse(0,0,0,0,new Color(0,0,0,0.2));
             if(recButton.isSelected()) {
                 forme_curseur = new Rectangle(evt.getX(),evt.getY(),width.getValue(),height.getValue(),new Color(0,0,0,0.2));
@@ -134,7 +128,7 @@ public class ControllerDessin implements Initializable {
             else if(lineButton.isSelected() || rainbowButton.isSelected() || eraseButton.isSelected()){
                 forme_curseur = new Ellipse(evt.getX(),evt.getY(),Math.min(width.getValue(), height.getValue()),Math.min(width.getValue(), height.getValue()),new Color(0,0,0,0.2));
             }
-            cursor.setValue(Shape_cursor_creator(forme_curseur));
+            cursor.setValue(createViewShapeFromShape(forme_curseur));
 
         });
 
@@ -182,29 +176,6 @@ public class ControllerDessin implements Initializable {
         });
     }
 
-    private Shape Shape_cursor_creator(final Forme forme){
-        if (forme instanceof Rectangle) {
-            javafx.scene.shape.Rectangle res = new javafx.scene.shape.Rectangle();
-            res.heightProperty().bindBidirectional(forme.heightProperty());
-            res.widthProperty().bindBidirectional(forme.widthProperty());
-            res.xProperty().bindBidirectional(forme.positionXProperty());
-            res.yProperty().bindBidirectional(forme.positionYProperty());
-            res.fillProperty().bindBidirectional(forme.couleurProperty());
-            res.setUserData(forme);
-            return res;
-        }
-        else if (forme instanceof Ellipse) {
-            javafx.scene.shape.Ellipse res = new javafx.scene.shape.Ellipse();
-            res.radiusXProperty().bind(Bindings.divide(forme.widthProperty(), 2.0));
-            res.radiusYProperty().bind(Bindings.divide(forme.heightProperty(), 2.0));
-            res.centerXProperty().bindBidirectional(forme.positionXProperty());
-            res.centerYProperty().bindBidirectional(forme.positionYProperty());
-            res.fillProperty().bindBidirectional(forme.couleurProperty());
-            res.setUserData(forme);
-            return res;
-        }
-        return null;
-    }
 
     private Shape createViewShapeFromShape(final Forme forme) {
         if (forme instanceof Rectangle) {
