@@ -7,12 +7,9 @@
 package drawingEditor.controller;
 
 import drawingEditor.model.*;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.beans.binding.*;
-import javafx.beans.property.DoubleProperty;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
@@ -26,10 +23,8 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
 import javafx.util.StringConverter;
-
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -68,19 +63,30 @@ public class ControllerDessin implements Initializable {
     ToggleButton rainbowButton;
     @FXML
     ToggleButton eraseButton;
+    @FXML
+    Label heightLabel;
+    @FXML
+    Label widthLabel;
+    @FXML
+    Label sizeLabel;
+    @FXML
+    Spinner<Double> size;
 
     static int teinte_rainbow=0;
     static int rainbowSpeed=3;
 
     private static SimpleObjectProperty<Shape> cursor = new SimpleObjectProperty<>();
 
-
     private Dessin dessin;
+
+    private static SimpleBooleanProperty heightWidthVisible = new SimpleBooleanProperty();
+    private static SimpleBooleanProperty colorPickerVisible = new SimpleBooleanProperty();
+    private static SimpleBooleanProperty sizeVisible = new SimpleBooleanProperty();
+    private static SimpleBooleanProperty rainbowVisible = new SimpleBooleanProperty();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        recButton.setSelected(true);
         colorPicker.setValue(Color.RED);
         xLabel.setVisible(false);
         yLabel.setVisible(false);
@@ -102,10 +108,12 @@ public class ControllerDessin implements Initializable {
 
         pane.setOnMouseDragged(evt -> {
             if (lineButton.isSelected()) {
-               dessin.ajouterForme(new Ellipse(evt.getX(), evt.getY(), Math.min(width.getValue(), height.getValue()),Math.min(width.getValue(), height.getValue()), colorPicker.getValue()));
-            } else if (rainbowButton.isSelected()){
-                dessin.ajouterForme(new Ellipse(evt.getX(), evt.getY(), Math.min(width.getValue(), height.getValue()),Math.min(width.getValue(), height.getValue()), Color.hsb(teinte_rainbow,1,1,0.7)));
-                teinte_rainbow+=rainbowSpeed;
+                Color c = null;
+                if (rainbowButton.isSelected()) {
+                    c=Color.hsb(teinte_rainbow,1,1,0.7);
+                    teinte_rainbow+=rainbowSpeed;
+                } else c = colorPicker.getValue();
+               dessin.ajouterForme(new Ellipse(evt.getX(), evt.getY(), size.getValue(),size.getValue(), c));
             } else if (eraseButton.isSelected()){
                 ArrayList<Forme> list = new ArrayList<>();
                 for(Forme f : dessin.getFormes()){
@@ -116,7 +124,7 @@ public class ControllerDessin implements Initializable {
                 for (Forme f : list){
                     dessin.supprimerForme(f);
                 }
-                Forme forme_curseur = new Ellipse(evt.getX(),evt.getY(),Math.min(width.getValue(), height.getValue()),Math.min(width.getValue(), height.getValue()),new Color(0,0,0,0.2));
+                Forme forme_curseur = new Ellipse(evt.getX(),evt.getY(),size.getValue(),size.getValue(),new Color(0,0,0,0.2));
                 cursor.setValue(createViewShapeFromShape(forme_curseur));
             }
 
@@ -132,7 +140,7 @@ public class ControllerDessin implements Initializable {
                 forme_curseur = new Ellipse(evt.getX(),evt.getY(),width.getValue(),height.getValue(),new Color(0,0,0,0.2));
             }
             else if(lineButton.isSelected() || rainbowButton.isSelected() || eraseButton.isSelected()){
-                forme_curseur = new Ellipse(evt.getX(),evt.getY(),Math.min(width.getValue(), height.getValue()),Math.min(width.getValue(), height.getValue()),new Color(0,0,0,0.2));
+                forme_curseur = new Ellipse(evt.getX(),evt.getY(),size.getValue(),size.getValue(),new Color(0,0,0,0.2));
             }
             cursor.setValue(createViewShapeFromShape(forme_curseur));
 
@@ -180,7 +188,51 @@ public class ControllerDessin implements Initializable {
                 }
             }
         });
+
+
+        colorPicker.visibleProperty().bind(colorPickerVisible);
+        widthLabel.visibleProperty().bind(heightWidthVisible);
+        width.visibleProperty().bind(heightWidthVisible);
+        heightLabel.visibleProperty().bind(heightWidthVisible);
+        height.visibleProperty().bind(heightWidthVisible);
+        rainbowButton.visibleProperty().bind(rainbowVisible);
+        sizeLabel.visibleProperty().bind(sizeVisible);
+        size.visibleProperty().bind(sizeVisible);
+
+        groupEditing.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2)
+            {
+
+                heightWidthVisible.setValue(false);
+                colorPickerVisible.setValue(false);
+                sizeVisible.setValue(false);
+                rainbowVisible.setValue(false);
+
+                if (recButton.isSelected() || ellButton.isSelected()){
+                    heightWidthVisible.setValue(true);
+                    colorPickerVisible.setValue(true);
+                } else if (lineButton.isSelected()){
+                    colorPickerVisible.setValue(true);
+                    sizeVisible.setValue(true);
+                    rainbowVisible.setValue(true);
+                } else if (eraseButton.isSelected()){
+                    sizeVisible.setValue(true);
+                }
+            }
+        });
+
+        rainbowButton.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (rainbowButton.isSelected()) colorPickerVisible.setValue(false);
+                else colorPickerVisible.setValue(true);
+            }
+        });
+
     }
+
 
 
     private Shape createViewShapeFromShape(final Forme forme) {
