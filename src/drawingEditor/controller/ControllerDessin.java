@@ -1,3 +1,9 @@
+/**
+ * @author : Pierre Antoine Cabaret, Nicolas Fouque
+ *
+ */
+
+
 package drawingEditor.controller;
 
 import drawingEditor.model.*;
