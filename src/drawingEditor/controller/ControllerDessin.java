@@ -117,7 +117,7 @@ public class ControllerDessin implements Initializable {
             } else if (eraseButton.isSelected()){
                 ArrayList<Forme> list = new ArrayList<>();
                 for(Forme f : dessin.getFormes()){
-                    if ((Math.abs(f.getPositionX()-evt.getX())<width.getValue()/2)&&(Math.abs(f.getPositionY()-evt.getY())<height.getValue()/2)){
+                    if ((Math.abs(f.getPositionX()-evt.getX())<size.getValue()/2)&&(Math.abs(f.getPositionY()-evt.getY())<size.getValue()/2)){
                         list.add(f);
                     }
                 }
