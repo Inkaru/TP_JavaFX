@@ -1,9 +1,14 @@
 package drawingEditor.controller;
 
 import drawingEditor.model.*;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.binding.*;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -60,10 +65,15 @@ public class ControllerDessin implements Initializable {
     final static private Color[] rainbowTab = {Color.DARKRED,Color.RED,Color.ORANGERED,Color.ORANGE,Color.LIGHTGOLDENRODYELLOW,Color.YELLOW,Color.YELLOWGREEN,Color.GREEN,Color.CYAN,Color.BLUE,Color.INDIGO,Color.BLUEVIOLET,Color.PURPLE};
     static int indice_rainbow= 0;
 
+    //private static Curseur cursor = new Curseur();
+    private static SimpleObjectProperty<Shape> cursor = new SimpleObjectProperty<>();
+
+
     private Dessin dessin;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         recButton.setSelected(true);
         colorPicker.setValue(Color.RED);
         xLabel.setVisible(false);
@@ -71,6 +81,11 @@ public class ControllerDessin implements Initializable {
         pane.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
         pane.setPrefSize(500,500);
         dessin = new DessinImpl();
+
+        //Shape shape_cursor = Shape_cursor_creator(new Rectangle(1,1,1,1,Color.RED));
+        //cursor.setValue(shape_cursor);
+
+
         updateSizePane();
         pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -83,11 +98,7 @@ public class ControllerDessin implements Initializable {
             }
         });
 
-        pane.setOnMousePressed(evt -> {
-            if (lineButton.isSelected()) {
 
-            }
-        });
         pane.setOnMouseDragged(evt -> {
             if (lineButton.isSelected()) {
                dessin.ajouterForme(new Ellipse(evt.getX(), evt.getY(), Math.min(width.getValue(), height.getValue()),Math.min(width.getValue(), height.getValue()), colorPicker.getValue()));
@@ -98,16 +109,43 @@ public class ControllerDessin implements Initializable {
             } else if (eraseButton.isSelected()){
                 ArrayList<Forme> list = new ArrayList<>();
                 for(Forme f : dessin.getFormes()){
-                    if ((Math.abs(f.getPositionX()-evt.getX())<f.getWidth()/2)&&(Math.abs(f.getPositionY()-evt.getY())<f.getHeight()/2)){
+                    if ((Math.abs(f.getPositionX()-evt.getX())<width.getValue()/2)&&(Math.abs(f.getPositionY()-evt.getY())<height.getValue()/2)){
                         list.add(f);
                     }
                 }
                 for (Forme f : list){
                     dessin.supprimerForme(f);
                 }
+                Forme forme_curseur = new Ellipse(evt.getX(),evt.getY(),Math.min(width.getValue(), height.getValue()),Math.min(width.getValue(), height.getValue()),new Color(0,0,0,0.2));
+                cursor.setValue(Shape_cursor_creator(forme_curseur));
             }
 
         });
+
+        pane.setOnMouseMoved(evt->{
+            System.out.println(evt.getX() + " " +evt.getY());
+            Forme forme_curseur = new Ellipse(0,0,0,0,new Color(0,0,0,0.2));
+            if(recButton.isSelected()) {
+                forme_curseur = new Rectangle(evt.getX(),evt.getY(),width.getValue(),height.getValue(),new Color(0,0,0,0.2));
+            }
+            else if(ellButton.isSelected()){
+                forme_curseur = new Ellipse(evt.getX(),evt.getY(),width.getValue(),height.getValue(),new Color(0,0,0,0.2));
+            }
+            else if(lineButton.isSelected() || rainbowButton.isSelected() || eraseButton.isSelected()){
+                forme_curseur = new Ellipse(evt.getX(),evt.getY(),Math.min(width.getValue(), height.getValue()),Math.min(width.getValue(), height.getValue()),new Color(0,0,0,0.2));
+            }
+            cursor.setValue(Shape_cursor_creator(forme_curseur));
+
+        });
+
+        cursor.addListener(new ChangeListener<Shape>() {
+            @Override
+            public void changed(ObservableValue<? extends Shape> observable, Shape oldValue, Shape newValue) {
+                pane.getChildren().add(newValue);
+                pane.getChildren().remove(oldValue);
+            }
+        });
+
 
         dessin.getFormes().addListener(new ListChangeListener<Forme>() {
             @Override
@@ -144,7 +182,29 @@ public class ControllerDessin implements Initializable {
         });
     }
 
-
+    private Shape Shape_cursor_creator(final Forme forme){
+        if (forme instanceof Rectangle) {
+            javafx.scene.shape.Rectangle res = new javafx.scene.shape.Rectangle();
+            res.heightProperty().bindBidirectional(forme.heightProperty());
+            res.widthProperty().bindBidirectional(forme.widthProperty());
+            res.xProperty().bindBidirectional(forme.positionXProperty());
+            res.yProperty().bindBidirectional(forme.positionYProperty());
+            res.fillProperty().bindBidirectional(forme.couleurProperty());
+            res.setUserData(forme);
+            return res;
+        }
+        else if (forme instanceof Ellipse) {
+            javafx.scene.shape.Ellipse res = new javafx.scene.shape.Ellipse();
+            res.radiusXProperty().bind(Bindings.divide(forme.widthProperty(), 2.0));
+            res.radiusYProperty().bind(Bindings.divide(forme.heightProperty(), 2.0));
+            res.centerXProperty().bindBidirectional(forme.positionXProperty());
+            res.centerYProperty().bindBidirectional(forme.positionYProperty());
+            res.fillProperty().bindBidirectional(forme.couleurProperty());
+            res.setUserData(forme);
+            return res;
+        }
+        return null;
+    }
 
     private Shape createViewShapeFromShape(final Forme forme) {
         if (forme instanceof Rectangle) {
@@ -259,7 +319,7 @@ public class ControllerDessin implements Initializable {
                 maxX = Math.max(maxX, ((Forme) s).getPositionX() + ((Forme) s).getWidth()/2);
                 maxY = Math.max(maxY, ((Forme) s).getPositionY() + ((Forme) s).getHeight()/2);
                 //minX = Math.min(minX, ((Forme) s).getPositionX() - ((Forme) s).getWidth()/2);
-               // minY = Math.min(minY, ((Forme) s).getPositionY() - ((Forme) s).getHeight()/2);
+                //minY = Math.min(minY, ((Forme) s).getPositionY() - ((Forme) s).getHeight()/2);
             }
         }
 
