@@ -69,8 +69,8 @@ public class ControllerDessin implements Initializable {
     @FXML
     ToggleButton eraseButton;
 
-    final static private Color[] rainbowTab = {Color.DARKRED,Color.RED,Color.ORANGERED,Color.ORANGE,Color.LIGHTGOLDENRODYELLOW,Color.YELLOW,Color.YELLOWGREEN,Color.GREEN,Color.CYAN,Color.BLUE,Color.INDIGO,Color.BLUEVIOLET,Color.PURPLE};
-    static int indice_rainbow= 0;
+    static int teinte_rainbow=0;
+    static int rainbowSpeed=3;
 
     private static SimpleObjectProperty<Shape> cursor = new SimpleObjectProperty<>();
 
@@ -104,9 +104,8 @@ public class ControllerDessin implements Initializable {
             if (lineButton.isSelected()) {
                dessin.ajouterForme(new Ellipse(evt.getX(), evt.getY(), Math.min(width.getValue(), height.getValue()),Math.min(width.getValue(), height.getValue()), colorPicker.getValue()));
             } else if (rainbowButton.isSelected()){
-                dessin.ajouterForme(new Ellipse(evt.getX(), evt.getY(), Math.min(width.getValue(), height.getValue()),Math.min(width.getValue(), height.getValue()), new Color(rainbowTab[indice_rainbow].getRed(),rainbowTab[indice_rainbow].getGreen(),rainbowTab[indice_rainbow].getBlue(),0.5)));
-                if(indice_rainbow==rainbowTab.length-1) indice_rainbow = 0;
-                else indice_rainbow++;
+                dessin.ajouterForme(new Ellipse(evt.getX(), evt.getY(), Math.min(width.getValue(), height.getValue()),Math.min(width.getValue(), height.getValue()), Color.hsb(teinte_rainbow,1,1,0.7)));
+                teinte_rainbow+=rainbowSpeed;
             } else if (eraseButton.isSelected()){
                 ArrayList<Forme> list = new ArrayList<>();
                 for(Forme f : dessin.getFormes()){
