@@ -35,12 +35,12 @@
                 <fx:define>
                     <ToggleGroup fx:id="groupEditing"/>
                 </fx:define>
-                <ToggleButton fx:id="recButton" mnemonicParsing="false" text="Rectangle" toggleGroup="$groupEditing"/>
-                <ToggleButton fx:id="ellButton" layoutX="10.0" layoutY="11.0" mnemonicParsing="false" text="Ellipse" toggleGroup="$groupEditing"/>
-                <ToggleButton fx:id="lineButton" layoutX="10.0" layoutY="11.0" mnemonicParsing="false" text="Brush" toggleGroup="$groupEditing"/>
-                <ToggleButton fx:id="moveButton" layoutX="91.0" layoutY="11.0" mnemonicParsing="false" text="Move Shape" toggleGroup="$groupEditing"/>
-                <ToggleButton fx:id="delButton" layoutX="120.0" layoutY="11.0" mnemonicParsing="false" text="Delete Shape" toggleGroup="$groupEditing"/>
-                <ToggleButton fx:id="eraseButton" layoutX="120.0" layoutY="11.0" mnemonicParsing="false" text="Eraser" toggleGroup="$groupEditing"/>
+                <ToggleButton fx:id="recButton" prefWidth="100.0" mnemonicParsing="false" text="Rectangle" toggleGroup="$groupEditing"/>
+                <ToggleButton fx:id="ellButton" prefWidth="100.0" layoutX="10.0" layoutY="11.0" mnemonicParsing="false" text="Ellipse" toggleGroup="$groupEditing"/>
+                <ToggleButton fx:id="lineButton" prefWidth="100.0" layoutX="10.0" layoutY="11.0" mnemonicParsing="false" text="Brush" toggleGroup="$groupEditing"/>
+                <ToggleButton fx:id="moveButton" prefWidth="100.0" layoutX="91.0" layoutY="11.0" mnemonicParsing="false" text="Move Shape" toggleGroup="$groupEditing"/>
+                <ToggleButton fx:id="delButton" prefWidth="100.0" layoutX="120.0" layoutY="11.0" mnemonicParsing="false" text="Delete Shape" toggleGroup="$groupEditing"/>
+                <ToggleButton fx:id="eraseButton" prefWidth="100.0" layoutX="120.0" layoutY="11.0" mnemonicParsing="false" text="Eraser" toggleGroup="$groupEditing"/>
             </items>
         </ToolBar>
     </left>

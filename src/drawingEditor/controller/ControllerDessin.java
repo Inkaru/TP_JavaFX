@@ -146,6 +146,7 @@ public class ControllerDessin implements Initializable {
 
         });
 
+
         cursor.addListener(new ChangeListener<Shape>() {
             @Override
             public void changed(ObservableValue<? extends Shape> observable, Shape oldValue, Shape newValue) {
