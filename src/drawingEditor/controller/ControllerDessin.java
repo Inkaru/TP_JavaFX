@@ -139,7 +139,7 @@ public class ControllerDessin implements Initializable {
             else if(ellButton.isSelected()){
                 forme_curseur = new Ellipse(evt.getX(),evt.getY(),width.getValue(),height.getValue(),new Color(0,0,0,0.2));
             }
-            else if(lineButton.isSelected() || rainbowButton.isSelected() || eraseButton.isSelected()){
+            else if(lineButton.isSelected() || eraseButton.isSelected()){
                 forme_curseur = new Ellipse(evt.getX(),evt.getY(),size.getValue(),size.getValue(),new Color(0,0,0,0.2));
             }
             cursor.setValue(createViewShapeFromShape(forme_curseur));
@@ -205,7 +205,7 @@ public class ControllerDessin implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2)
             {
-
+                rainbowButton.selectedProperty().setValue(false);
                 heightWidthVisible.setValue(false);
                 colorPickerVisible.setValue(false);
                 sizeVisible.setValue(false);
