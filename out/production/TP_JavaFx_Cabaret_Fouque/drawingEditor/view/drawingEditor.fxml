@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<BorderPane fx:id="borderPane"  xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drawingEditor.controller.ControllerDessin">
+    <top>
+        <ToolBar prefHeight="40.0" prefWidth="600.0">
+            <items>
+                <Label text="Paramètres" />
+                <Label fx:id="widthLabel" text="Width" />
+                <Spinner fx:id="width" editable="true" prefHeight="26.0" prefWidth="81.0" min="5.0" max="200.0" initialValue="20.0" amountToStepBy="5.0"/>
+                <Label fx:id="heightLabel" text="Height" />
+                <Spinner fx:id="height" editable="true" prefHeight="26.0" prefWidth="93.0" min="5.0" max="200.0" initialValue="20.0" amountToStepBy="5.0"/>
+                <Label fx:id="sizeLabel" text="Size" />
+                <Spinner fx:id="size" editable="true" prefHeight="26.0" prefWidth="93.0" min="5.0" max="200.0" initialValue="20.0" amountToStepBy="5.0"/>
+                <ColorPicker fx:id="colorPicker" prefHeight="26.0" prefWidth="104.0" />
+                <ToggleButton fx:id="rainbowButton" layoutX="10.0" layoutY="11.0" mnemonicParsing="false" text="Rainbow"/>
+                <Label fx:id="xLabel"/>
+                <Label fx:id="yLabel"/>
+            </items>
+        </ToolBar>
+    </top>
+    <left>
+        <ToolBar orientation="VERTICAL">
+            <items>
+                <Label text="Outils" />
+                <fx:define>
+                    <ToggleGroup fx:id="groupEditing"/>
+                </fx:define>
+                <ToggleButton fx:id="recButton" prefWidth="100.0" mnemonicParsing="false" text="Rectangle" toggleGroup="$groupEditing"/>
+                <ToggleButton fx:id="ellButton" prefWidth="100.0" layoutX="10.0" layoutY="11.0" mnemonicParsing="false" text="Ellipse" toggleGroup="$groupEditing"/>
+                <ToggleButton fx:id="lineButton" prefWidth="100.0" layoutX="10.0" layoutY="11.0" mnemonicParsing="false" text="Brush" toggleGroup="$groupEditing"/>
+                <ToggleButton fx:id="moveButton" prefWidth="100.0" layoutX="91.0" layoutY="11.0" mnemonicParsing="false" text="Move Shape" toggleGroup="$groupEditing"/>
+                <ToggleButton fx:id="delButton" prefWidth="100.0" layoutX="120.0" layoutY="11.0" mnemonicParsing="false" text="Delete Shape" toggleGroup="$groupEditing"/>
+                <ToggleButton fx:id="eraseButton" prefWidth="100.0" layoutX="120.0" layoutY="11.0" mnemonicParsing="false" text="Eraser" toggleGroup="$groupEditing"/>
+            </items>
+        </ToolBar>
+    </left>
+    <center>
+        <ScrollPane fx:id="scrollPane" prefHeight="400.0" prefWidth="600.0">
+            <Pane fx:id="pane">
+
+            </Pane>
+        </ScrollPane>
+    </center>
+</BorderPane>
