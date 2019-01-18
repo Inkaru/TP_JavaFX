@@ -91,7 +91,7 @@ public class ControllerDessin implements Initializable {
         xLabel.setVisible(false);
         yLabel.setVisible(false);
         pane.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
-        pane.setPrefSize(500,500);
+        pane.setPrefSize(600,600);
         dessin = new DessinImpl();
         updateSizePane();
         pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -231,7 +231,7 @@ public class ControllerDessin implements Initializable {
                 else colorPickerVisible.setValue(true);
             }
         });
-
+        recButton.selectedProperty().setValue(true);
     }
 
 
